@@ -2,13 +2,14 @@
 defined('BASEPATH') OR exist ('No direct script access allowed');
 
 
-class Site extends CI_Controller {
+class User extends CI_Controller {
 
     public function index(){
-        $data['title'] = "Page d'accueil";
+        $data['title'] = "Liste des utilisateurs";
         
         $this->load->view('common/header', $data);
-        $this->load->view('site/index', $data);
+        $this->load->view('user/index', $data);
         $this->load->view('common/footer', $data);
     }
+    
 }
