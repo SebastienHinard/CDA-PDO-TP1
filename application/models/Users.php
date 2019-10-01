@@ -17,7 +17,7 @@ class Users extends CI_Model {
         return $query->row();
     }
 
-    public function createOrUpdate() {      
+    public function createUser() {      
         $id=$this->input->post('id');       
         $data = array(
             'lastname' => $this->input->post('lastname'),
@@ -34,6 +34,20 @@ class Users extends CI_Model {
             $this->db->where('id',$id);
             return $this->db->update('Users',$data);
         }
+    }
+    public function updateUser($id) {      
+        $data = array(
+            'lastname' => $this->input->post('lastname'),
+            'firstname' => $this->input->post('firstname'),
+            'birthdate' => $this->input->post('birthdate'),
+            'address' => $this->input->post('address'),
+            'zipcode' => $this->input->post('zipcode'),
+            'phone' => $this->input->post('phone'),
+            'id_Services' => $this->input->post('id_Services'),
+        );      
+
+        $this->db->where('id',$id);
+        return $this->db->update('Users',$data);
     }
     
     public function deleteUser($id){

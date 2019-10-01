@@ -1,27 +1,27 @@
 <div class="row justify-content-center">
-    <form action="" method="post" class="col-md-6 col-lg-4 mt-5">
+    <form action="<?= site_url('edit/' . $user->id) ?>" method="post" class="col-md-6 col-lg-4 mt-5">
         <div class="form-group my-1">
-            <label for="lastname">Nom</label>
+            <label for="lastname">Nom</label> <?= form_error('lastname') ?>
             <input type="text" id="lastname" name="lastname" class="form-control" value="<?= $user->lastname ?? '' ?>">
         </div>
         <div class="form-group my-1">
-            <label for="firstname">Prénom</label>
+            <label for="firstname">Prénom</label> <?= form_error('firstname') ?>
             <input type="text" id="firstname" name="firstname" class="form-control" value="<?= $user->firstname ?? '' ?>">
         </div>
         <div class="form-group my-1">
-            <label for="birthdate">Date de naissance</label>
+            <label for="birthdate">Date de naissance</label> <?= form_error('birthdate') ?>
             <input type="date" id="birthdate" name="birthdate" class="form-control" value="<?= $user->birthdate ?? '' ?>">
         </div>
         <div class="form-group my-1">
-            <label for="address">Adresse</label>
+            <label for="address">Adresse</label> <?= form_error('address') ?>
             <input type="text" id="address" name="address" class="form-control" value="<?= $user->address ?? '' ?>">
         </div>
         <div class="form-group my-1">
-            <label for="zipcode">Code Postal</label>
+            <label for="zipcode">Code Postal</label> <?= form_error('zipcode') ?>
             <input type="text" id="zipcode" name="zipcode" class="form-control" value="<?= $user->zipcode ?? '' ?>">
         </div>
         <div class="form-group my-1">
-            <label for="phone">Telephone</label>
+            <label for="phone">Telephone</label> <?= form_error('phone') ?>
             <input type="text" id="phone" name="phone" class="form-control" value="<?= $user->phone ?? '' ?>">
         </div>
         <div class="form-group my-1">
@@ -35,7 +35,7 @@
         </div>
         <div class="row justify-content-around my-5">
             <a href="<?= site_url() ?>" class="btn btn-outline-secondary col-4">Retour</a>
-            <input type="submit" class="form-control btn btn-outline-success col-4">
+            <input type="submit" class="form-control btn btn-outline-success col-4" name="update">
         </div>
     </form>
 </div>

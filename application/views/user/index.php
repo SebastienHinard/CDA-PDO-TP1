@@ -44,3 +44,6 @@
         </div>
     <?php } ?>
 <?php } ?>
+<div class="row justify-content-end">
+    <a href="" class="btn btn-outline-success mr-5">Ajout utilisateurs</a>
+</div>
