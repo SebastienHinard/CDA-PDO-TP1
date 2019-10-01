@@ -66,7 +66,7 @@ class User extends CI_Controller {
             show_404();
         }else{
             $user = $this->Users->deleteUser($id);
-            redirect( base_url('user') );   
+            redirect('');   
         }
     }
 
