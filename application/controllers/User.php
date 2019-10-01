@@ -7,7 +7,8 @@ class User extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Users');
-        $this->load->helper('url_helper');
+        $this->load->model('Services');
+        $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
     }
@@ -32,6 +33,7 @@ class User extends CI_Controller {
     public function edit() {
         $id = $this->uri->segment(2);
         $data['title'] = "Modification d'un utilisateur";
+        $data['services'] = $this->Services->getServices();
 
         if (empty($id)) {
             show_404();
