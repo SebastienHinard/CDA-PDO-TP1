@@ -23,7 +23,7 @@
                     <td><?= $user->address ?></td>
                     <td><?= $user->zipcode ?></td>
                     <td><?= $user->phone ?></td>
-                    <td><?= $user->id_Services ?></td>
+                    <td><?= $user->name ?></td>
                     <td><a href="<?= site_url('edit/'.$user->id) ?>" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a></td>
                     <td><button type="button" data-toggle="modal" data-target="#delete<?= $user->id ?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>
