@@ -14,20 +14,33 @@
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($users as $user) { ?>
-            <tr>
-                <td><?= $user->id ?></td>
-                <td><?= $user->lastname ?></td>
-                <td><?= $user->firstname ?></td>
-                <td><?= $user->birthdate ?></td>
-                <td><?= $user->address ?></td>
-                <td><?= $user->zipcode ?></td>
-                <td><?= $user->phone ?></td>
-                <td><?= $user->id_Services ?></td>
-                <td>Edit</td>
-                <td>Delete</td>
-            </tr>
-        <?php } ?>
+            <?php foreach ($users as $user) { ?>
+                <tr>
+                    <td><?= $user->id ?></td>
+                    <td><?= $user->lastname ?></td>
+                    <td><?= $user->firstname ?></td>
+                    <td><?= $user->birthdate ?></td>
+                    <td><?= $user->address ?></td>
+                    <td><?= $user->zipcode ?></td>
+                    <td><?= $user->phone ?></td>
+                    <td><?= $user->id_Services ?></td>
+                    <td><a href="edit/<?= $user->id ?>" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a></td>
+                    <td><button type="button" data-toggle="modal" data-target="#delete<?= $user->id ?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
+                </tr>
+            <?php } ?>
         </tbody>
     </table>
+    <?php foreach ($users as $user) { ?>
+        <div class="modal fade" id="delete<?= $user->id ?>" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content text-center">
+                    <h2 class="bg-dark text-white p-2">Attention</h2>
+                    <p>Voulez-vous supprimer <b><?= $user->firstname . ' ' . $user->lastname ?></b>?</p>
+                    <div class="row justify-content-center">
+                        <a href="delete/<?= $user->id ?>" class="btn btn-outline-danger col-4 my-3">Confirmer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
 <?php } ?>
