@@ -7,7 +7,7 @@
             <?php endforeach; ?>
         </select>
         <div class="ml-2">
-            <input class="btn btn-danger" type="submit" name="filter" value="Rechercher">
+            <button class="btn btn-danger" type="submit" name="filter"><i class="fas fa-search"></i>Rechercher</button>
         </div>
     </form>
 </div>
@@ -58,5 +58,5 @@
     </div>
 <?php } ?>
 <div class="row justify-content-end">
-    <a href="" class="btn btn-success mr-5">Ajout utilisateurs</a>
+    <a href="<?= site_url('create/')?>" class="btn btn-success mr-5"><i class="fas fa-plus"></i> Ajout utilisateurs</a>
 </div>
