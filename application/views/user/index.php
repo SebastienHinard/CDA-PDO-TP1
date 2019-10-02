@@ -1,9 +1,9 @@
 <div class="row justify-content-end mr-5 my-3">
     <form class="form-inline" action="" method="post">
         <select class="form-control" name="field">
-            <option selected="selected" disabled="disabled" value="">Choisir le service</option>
+            <option selected="selected" value=0>Tous les services</option>
             <?php foreach ($services as $service): ?>
-                <option value="<?= $service->id ?>" ><?= $service->id ?>. <?= $service->name ?></option>
+                <option value="<?= $service->id ?>" <?=$service->id == $_POST['field'] ? 'selected' : '' ?> ><?= $service->id ?>. <?= $service->name ?></option>
             <?php endforeach; ?>
         </select>
         <div class="ml-2">

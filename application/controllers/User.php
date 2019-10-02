@@ -15,7 +15,7 @@ class User extends CI_Controller {
         $data['title'] = "Liste des utilisateurs";
         $data['services'] = $this->Services->getServices();
 
-        if ($_POST) {
+        if (isset($_POST['field']) && $_POST['field']!=0) {
             $data['users'] = $this->Users->getUsersByServices($_POST['field']);
         } else {
             $data['users'] = $this->Users->getUsers();
@@ -34,7 +34,7 @@ class User extends CI_Controller {
             $this->form_validation->set_error_delimiters('<small class="alert alert-danger p-1 ml-1 ">', '</small>');
 
             if ($this->form_validation->run() === TRUE) {
-                $this->Users->createUser($id);
+                $this->Users->createUser();
                 redirect(base_url());
             }
         }
