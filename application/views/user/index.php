@@ -45,5 +45,5 @@
     <?php } ?>
 <?php } ?>
 <div class="row justify-content-end">
-    <a href="" class="btn btn-outline-success mr-5">Ajout utilisateurs</a>
+    <a href="<?= site_url('create') ?>" class="btn btn-outline-success mr-5">Ajout utilisateurs</a>
 </div>
