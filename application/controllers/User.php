@@ -18,7 +18,13 @@ class User extends CI_Controller {
 
     public function index() {
         $data['title'] = "Liste des utilisateurs";
-        $data['users'] = $this->Users->getUsers();
+        $data['services'] = $this->Services->getServices();
+        
+        if ($_POST){
+            $data['users'] = $this->Users->getUsersByServices($_POST['field']);
+        } else {
+            $data['users'] = $this->Users->getUsers();
+        }
 
         $this->load->view('common/header', $data);
         $this->load->view('user/index', $data);
@@ -91,5 +97,5 @@ class User extends CI_Controller {
             redirect('');
         }
     }
-
+    
 }

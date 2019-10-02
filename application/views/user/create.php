@@ -28,9 +28,8 @@
             <label for="id_Services">Service</label>
             <select name="id_Services" class="form-control">
                 <option value="0" selected disabled>Veuillez choisir un service</option>
-                
             </select>
         </div>
-        <input type="submit" class="form-control btn btn-outline-success mt-5">
+        <input type="submit" class="form-control btn btn-success mt-5">
     </form>
 </div>
