@@ -8,19 +8,24 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->model(['Users', 'Services']);
         $this->load->helper(['url', 'form']);
-        $this->load->library('form_validation');
+        $this->load->library(['form_validation', 'pagination']);
     }
 
     public function index() {
+
         $data['title'] = "Liste des utilisateurs";
         $data['services'] = $this->Services->getServices();
 
-        if (isset($_POST['field']) && $_POST['field']!=0) {
-            $data['users'] = $this->Users->getUsersByServices($_POST['field']);
-        } else {
-            $data['users'] = $this->Users->getUsers();
-        }
 
+        $data['users'] = $this->Users->getUsers();
+        
+        $this->load->config('pagination');
+        $config = $this->config->item('pagination_config');
+        $config['total_rows'] = $this->Users->countAll();
+        $this->pagination->initialize($config);
+        
+        $data['pagination'] = $this->pagination->create_links();
+        
         $this->load->view('common/header', $data);
         $this->load->view('user/index', $data);
         $this->load->view('common/footer', $data);

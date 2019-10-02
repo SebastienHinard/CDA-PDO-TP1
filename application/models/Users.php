@@ -6,10 +6,27 @@ class Users extends CI_Model {
         $this->load->database();
     }
 
+    public function countAll(){
+        if (isset($_GET['service']) && $_GET['service']!=0) {
+            $this->db->where('id_Services',$_GET['service']);
+            $this->db->from('Users');
+            return $this->db->count_all_results();
+        }
+        return $this->db->count_all('Users');
+    }
+    
     public function getUsers() {
-        $this->db->select(['Users.*','Services.name']);
+        $results = 5;
+        $first = isset($_GET['per_page']) ? ($_GET['per_page'] -1) * $results : 0;
+
+        $this->db->select(['Users.*', 'Services.name']);
         $this->db->join('Services', 'Users.id_Services = Services.id');
-        $query = $this->db->get('Users');
+        $this->db->limit($results, $first);
+        if (isset($_GET['service']) && $_GET['service']!=0) {
+            $query = $this->db->get_where('Users', array('id_Services' => $_GET['service']));
+        } else {
+            $query = $this->db->get('Users');
+        }
         return $query->result();
     }
 
@@ -18,13 +35,9 @@ class Users extends CI_Model {
         return $query->row();
     }
 
-    public function getUsersByServices($id) {
-        $this->db->join('Services', 'Users.id_Services = Services.id');
-        $query = $this->db->get_where('Users', array('id_Services' => $id));
-        return $query->result();
-    }
-    public function createUser() {      
-        $id=$this->input->post('id');       
+
+    public function createUser() {
+        $id = $this->input->post('id');
         $data = array(
             'lastname' => $this->input->post('lastname'),
             'firstname' => $this->input->post('firstname'),
@@ -33,15 +46,16 @@ class Users extends CI_Model {
             'zipcode' => $this->input->post('zipcode'),
             'phone' => $this->input->post('phone'),
             'id_Services' => $this->input->post('id_Services'),
-        );      
-        if(empty($id)){
-            return $this->db->insert('Users',$data);
-        }else{
-            $this->db->where('id',$id);
-            return $this->db->update('Users',$data);
+        );
+        if (empty($id)) {
+            return $this->db->insert('Users', $data);
+        } else {
+            $this->db->where('id', $id);
+            return $this->db->update('Users', $data);
         }
     }
-    public function updateUser($id) {      
+
+    public function updateUser($id) {
         $data = array(
             'lastname' => $this->input->post('lastname'),
             'firstname' => $this->input->post('firstname'),
@@ -50,14 +64,14 @@ class Users extends CI_Model {
             'zipcode' => $this->input->post('zipcode'),
             'phone' => $this->input->post('phone'),
             'id_Services' => $this->input->post('id_Services'),
-        );      
+        );
 
-        $this->db->where('id',$id);
-        return $this->db->update('Users',$data);
+        $this->db->where('id', $id);
+        return $this->db->update('Users', $data);
     }
-    
-    public function deleteUser($id){
-        $this->db->where('id',$id);
+
+    public function deleteUser($id) {
+        $this->db->where('id', $id);
         return $this->db->delete('Users');
     }
 
