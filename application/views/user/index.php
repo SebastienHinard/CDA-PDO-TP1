@@ -1,6 +1,6 @@
 <?php if ($users) { ?>
-    <table class="table">
-        <thead class="thead-dark">
+    <table class="table table-hover border bg-white">
+        <thead class="thead-light">
             <tr>
                 <th>ID</th>
                 <th>Nom</th>

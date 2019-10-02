@@ -55,7 +55,6 @@ class User extends CI_Controller {
                 redirect(base_url());
             }
         } 
-        var_dump($_POST);
         $data['user'] = $this->Users->getUserById($id);
         
         if (empty($data['user'])) {

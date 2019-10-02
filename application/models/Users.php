@@ -7,6 +7,7 @@ class Users extends CI_Model {
     }
 
     public function getUsers() {
+        $this->db->select(['Users.*','Services.name']);
         $this->db->join('Services', 'Users.id_Services = Services.id');
         $query = $this->db->get('Users');
         return $query->result();
