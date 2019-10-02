@@ -8,18 +8,78 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->model(['Users', 'Services']);
         $this->load->helper(['url', 'form']);
-        $this->load->library('form_validation');
+        $this->load->library(['form_validation', 'pagination', 'session']);
+        $this->load->config('pagination');
     }
 
-    public function index() {
+    public function index($rowno=0) {
         $data['title'] = "Liste des utilisateurs";
         $data['services'] = $this->Services->getServices();
 
-        if (isset($_POST['field']) && $_POST['field']!=0) {
-            $data['users'] = $this->Users->getUsersByServices($_POST['field']);
+        // Search text
+        $search_text = "";
+        if ($this->input->post('field') != NULL) {
+            $search_text = $this->input->post('field');
+            $this->session->set_userdata(array("search" => $search_text));
         } else {
-            $data['users'] = $this->Users->getUsers();
+            if ($this->session->userdata('search') != NULL) {
+                $search_text = $this->session->userdata('search');
+            }
         }
+
+        // Row per page
+        $rowperpage = 3;
+
+        // Row position
+        if ($rowno != 0) {
+            $rowno = ($rowno - 1) * $rowperpage;
+        }
+
+        // All records count
+        $allcount = $this->Users->getrecordCount($search_text);
+
+        // Get records
+        $users_record = $this->Users->getData($rowno, $rowperpage, $search_text);
+
+        // Pagination Configuration
+        $config['base_url'] = site_url('page');
+        $config['use_page_numbers'] = TRUE;
+        $config['total_rows'] = $allcount;
+        $config['per_page'] = $rowperpage;
+
+        // Initialize
+        $this->pagination->initialize($config);
+
+        $data['links'] = $this->pagination->create_links();
+        $data['users'] = $users_record;
+        $data['row'] = $rowno;
+        $data['search'] = $search_text;
+
+
+//        // init params
+//        $limit_per_page = 3;
+//        $start_index = ($this->uri->segment(2)) ? ($this->uri->segment(2) - 1) * $limit_per_page : 0;
+//        $total_records = $this->Users->get_total();
+//
+//        if ($total_records > 0) {
+//            // get current page records
+//            $data['users'] = $this->Users->get_current_page_records($limit_per_page, $start_index);
+//
+//            $config = $this->config->item('pagination_config');
+//            $config['base_url'] = site_url('page');
+//            $config['total_rows'] = $total_records;
+//            $config['uri_segment'] = 2;
+//
+//            $this->pagination->initialize($config);
+//
+//            // build paging links
+//            $data['links'] = $this->pagination->create_links();
+//        }
+//        if (isset($_POST['field']) && $_POST['field']!=0) {
+//            $data['users'] = $this->Users->getUsersByServices($_POST['field']);
+//        } else {
+//            $data['users'] = $this->Users->getUsers();
+//        }
 
         $this->load->view('common/header', $data);
         $this->load->view('user/index', $data);

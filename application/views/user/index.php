@@ -3,15 +3,17 @@
         <select class="form-control" name="field">
             <option selected="selected" value=0>Tous les services</option>
             <?php foreach ($services as $service): ?>
-                <option value="<?= $service->id ?>" <?=$service->id == $_POST['field'] ? 'selected' : '' ?> ><?= $service->id ?>. <?= $service->name ?></option>
+                <option value="<?= $service->id ?>" <?= $_POST && $service->id == $_POST['field'] ? 'selected' : '' ?> ><?= $service->id ?>. <?= $service->name ?></option>
             <?php endforeach; ?>
         </select>
         <div class="ml-2">
-            <button class="btn btn-danger" type="submit" name="filter"><i class="fas fa-search"></i>Rechercher</button>
+            <button class="btn btn-danger" type="submit" name="filter"><i class="fas fa-search"></i> Rechercher</button>
         </div>
     </form>
 </div>
-
+<?= 
+    var_dump($this->session->search);
+?>
 <table class="table table-hover border bg-white">
 
     <thead class="thead-dark">
@@ -37,7 +39,7 @@
                 <td><?= $user->address ?></td>
                 <td><?= $user->zipcode ?></td>
                 <td><?= $user->phone ?></td>
-                <td><?= $user->name ?></td>
+                <!--<td><?= $user->name ?></td>-->
                 <td><a href="<?= site_url('edit/' . $user->id) ?>" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a></td>
                 <td><button type="button" data-toggle="modal" data-target="#delete<?= $user->id ?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
             </tr>
@@ -59,4 +61,7 @@
 <?php } ?>
 <div class="row justify-content-end">
     <a href="<?= site_url('create/')?>" class="btn btn-success mr-5"><i class="fas fa-plus"></i> Ajout utilisateurs</a>
+</div>
+<div class="row justify-content-center">
+    <?= $links ?>
 </div>
