@@ -1,4 +1,17 @@
-<?php if ($users) { ?>
+<div class="row justify-content-end mr-5 my-3">
+<form class="form-inline" action="" method="post">
+        <select class="form-control" name="field">
+            <option selected="selected" disabled="disabled" value="">Choisir le service</option>
+                <?php foreach ($services as $service): ?>
+                    <option value="<?= $service->id ?>" ><?= $service->id ?>. <?= $service->name ?></option>
+                <?php endforeach; ?>
+        </select>
+    <div class="ml-2">
+        <input class="btn btn-danger" type="submit" name="filter" value="Rechercher">
+    </div>
+  </form>
+</div>
+
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -43,7 +56,6 @@
             </div>
         </div>
     <?php } ?>
-<?php } ?>
 <div class="row justify-content-end">
     <a href="" class="btn btn-outline-success mr-5">Ajout utilisateurs</a>
 </div>

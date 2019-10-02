@@ -17,6 +17,11 @@ class Users extends CI_Model {
         return $query->row();
     }
 
+    public function getUsersByServices($id) {
+        $this->db->join('Services', 'Users.id_Services = Services.id');
+        $query = $this->db->get_where('Users', array('id_Services' => $id));
+        return $query->result();
+    }
     public function createUser() {      
         $id=$this->input->post('id');       
         $data = array(
