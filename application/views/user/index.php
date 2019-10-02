@@ -3,7 +3,7 @@
         <select class="form-control" name="service">
             <option selected="selected" value=0>Tous les services</option>
             <?php foreach ($services as $service): ?>
-                <option value="<?= $service->id ?>" <?=$_POST && $service->id == $_POST['field'] ? 'selected' : '' ?> ><?= $service->id ?>. <?= $service->name ?></option>
+                <option value="<?= $service->id ?>" <?= $_POST && $service->id == $_POST['field'] ? 'selected' : '' ?> ><?= $service->id ?>. <?= $service->name ?></option>
             <?php endforeach; ?>
         </select>
         <div class="ml-2">
@@ -63,5 +63,5 @@
 </div>
 
 <div class="row justify-content-end">
-    <a href="<?= site_url('create/')?>" class="btn btn-success mr-5"><i class="fas fa-plus"></i> Ajout utilisateurs</a>
+    <a href="<?= site_url('create/') ?>" class="btn btn-success mr-5"><i class="fas fa-plus"></i> Ajout utilisateurs</a>
 </div>
